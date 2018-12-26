@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="@string/manageTasks">
+        <menu>
+            <item
+                android:id="@+id/showTasks"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/showTasks" />
+            <item
+                android:id="@+id/addTask"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/addTask" />
+            <item
+                android:id="@+id/modifyTask"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/modifyTask" />
+        </menu>
+    </item>
+
+    <item android:title="@string/other">
+        <menu>
+            <item
+                android:id="@+id/showLocation"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/showLocation" />
+            <item
+                android:id="@+id/showContacts"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/showContacts" />
+            <item
+                android:id="@+id/play"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/play" />
+        </menu>
+    </item>
+
+</menu>
