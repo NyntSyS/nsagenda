@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Datos de usuario">
+        <EditTextPreference
+            android:key="nombre"
+            android:title="Nombre"
+            android:summary="Establecer nombre"
+            android:dialogTitle="Nombre" />
+
+        <EditTextPreference
+            android:key="apellidos"
+            android:title="Apellidos"
+            android:summary="Establecer apellidos"
+            android:dialogTitle="Apellidos" />
+
+        <EditTextPreference
+            android:key="email"
+            android:title="Correo electrónico"
+            android:summary="Establecer correo electrónico"
+            android:dialogTitle="Correo electrónico" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Ajustes">
+        <CheckBoxPreference
+            android:key="ocultarLogo"
+            android:title="Ocultar logo"
+            android:summary="Activa o desactiva el logo al iniciar la aplicación" />
+
+        <CheckBoxPreference
+            android:key="musicaJuegos"
+            android:title="Música en juegos"
+            android:summary="Activa o desactiva la música de los juegos" />
+
+        <CheckBoxPreference
+            android:key="loginAutomatico"
+            android:title="Iniciar sesión automáticamente"
+            android:summary="Permite iniciar sesión al iniciar la aplicación" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

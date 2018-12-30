@@ -2,7 +2,9 @@ package com.dam.nestor_samuel.nsagenda;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +34,7 @@ import okhttp3.Response;
 public class ActivityRegister extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
+    private SharedPreferences sharedPreferences;
 
     @BindView(R.id.aRegister_et_nombre)
     EditText et_nombre;
@@ -72,7 +75,9 @@ public class ActivityRegister extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         ButterKnife.bind(this);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
     }
 
     private boolean verificarCampos() {
@@ -283,6 +288,7 @@ public class ActivityRegister extends AppCompatActivity {
 
         OkHttpClient client;
         Usuario usuario;
+        String md5Password;
 
         final String URL = "https://nesdam2018.000webhostapp.com/acceder.php";
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");
@@ -297,12 +303,14 @@ public class ActivityRegister extends AppCompatActivity {
             Response response;          // Respuesta del servidor
             JSONObject responseJSON;    // Objeto JSON con los datos recogidos del servidor
 
+            md5Password = params[1];
+
             try {
                 client = new OkHttpClient();
 
                 jsonObject = new JSONObject();
                 jsonObject.put("nick", params[0]);
-                jsonObject.put("password", params[1]);
+                jsonObject.put("password", md5Password);
 
                 body = RequestBody.create(JSON, jsonObject.toString());
                 request = new Request.Builder()
@@ -343,6 +351,12 @@ public class ActivityRegister extends AppCompatActivity {
             progressDialog.dismiss();
 
             if(aBoolean) {
+                sharedPreferences.edit().putString("nombre", usuario.getNombre()).apply();
+                sharedPreferences.edit().putString("apellidos", usuario.getApellidos()).apply();
+                sharedPreferences.edit().putString("nick", usuario.getNick()).apply();
+                sharedPreferences.edit().putString("email", usuario.getEmail()).apply();
+                sharedPreferences.edit().putString("password", md5Password).apply();
+
                 Intent intent = new Intent(ActivityRegister.this, ActivityMain.class);
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("Usuario", usuario);
@@ -351,7 +365,7 @@ public class ActivityRegister extends AppCompatActivity {
                 finish();
             }
             else {
-                Toast.makeText(getBaseContext(), "Acceso incorrecto", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "No se pudo iniciar sesión", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(ActivityRegister.this, ActivityLogin.class);
                 startActivity(intent);
                 finish();

@@ -11,28 +11,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
-        <activity android:name=".ActivityLogo"></activity>
-=======
         <activity android:name=".ActivityLogo">
-
-        </activity>
->>>>>>> 5517ac87c22a2b952333f1fce0848a98529fbe97
-        <activity
-            android:name=".ActivityMain"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ActivityLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
+        <activity
+            android:name=".ActivityMain"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ActivityLogin"></activity>
         <activity android:name=".ActivityRegister"></activity>
-=======
->>>>>>> 5517ac87c22a2b952333f1fce0848a98529fbe97
+        <activity android:name=".ActivityPreferences"></activity>
     </application>
 
 </manifest>

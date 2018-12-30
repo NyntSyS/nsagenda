@@ -4,12 +4,11 @@ import org.threeten.bp.LocalDateTime;
 
 public class Tarea {
 
-    int id;
-    int color;
-    String nombreTarea;
-    String descripcion;
-    LocalDateTime fechaTarea;
-
+    private int id;
+    private int color;
+    private String nombreTarea;
+    private String descripcion;
+    private LocalDateTime fechaTarea;
 
     public Tarea(int color, String nombreTarea, String descripcion, LocalDateTime fechaTarea) {
         id = 0;

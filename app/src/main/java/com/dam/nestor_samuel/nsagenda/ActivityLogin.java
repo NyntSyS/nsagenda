@@ -2,7 +2,9 @@ package com.dam.nestor_samuel.nsagenda;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,7 +19,6 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +32,7 @@ import okhttp3.Response;
 public class ActivityLogin extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
+    private SharedPreferences sharedPreferences;
 
     @BindView(R.id.aLogin_et_usuario)
     EditText et_usuario;
@@ -60,7 +61,9 @@ public class ActivityLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         ButterKnife.bind(this);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
     }
 
     private boolean verificarCampos() {
@@ -181,6 +184,13 @@ public class ActivityLogin extends AppCompatActivity {
             progressDialog.dismiss();
 
             if(aBoolean) {
+                sharedPreferences.edit().putString("nombre", usuario.getNombre()).apply();
+                sharedPreferences.edit().putString("apellidos", usuario.getApellidos()).apply();
+                sharedPreferences.edit().putString("nick", usuario.getNick()).apply();
+                sharedPreferences.edit().putString("email", usuario.getEmail()).apply();
+                sharedPreferences.edit().putString("password",
+                        passwordToMD5(et_password.getText().toString())).apply();
+
                 Intent intent = new Intent(ActivityLogin.this, ActivityMain.class);
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("Usuario", usuario);
