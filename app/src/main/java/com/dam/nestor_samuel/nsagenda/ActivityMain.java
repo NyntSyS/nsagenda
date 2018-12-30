@@ -1,6 +1,7 @@
 package com.dam.nestor_samuel.nsagenda;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 /*import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,10 +16,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class ActivityMain extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class ActivityMain extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener,
+        FragmentNewTask.OnFragmentInteractionListener,
+        FragmentModifyTask.OnFragmentInteractionListener,
+        FragmentMapbox.OnFragmentInteractionListener,
+        FragmentShowTasks.OnFragmentInteractionListener,
+        FragmentGames.OnFragmentInteractionListener,
+        FragmentInfoUsers.OnFragmentInteractionListener {
 
-    Usuario usuario;
+    private Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +44,13 @@ public class ActivityMain extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         Bundle bundle = getIntent().getExtras();
-        Usuario usuario = bundle.getParcelable("Usuario");
+        usuario = bundle.getParcelable("Usuario");
+
+        if(savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, FragmentShowTasks.newInstance(usuario.getId()))
+                    .commitNow();
+        }
     }
 
     @Override
@@ -74,25 +87,45 @@ public class ActivityMain extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
-        /*if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }*/
+        if (id == R.id.mostrarTareas) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, FragmentShowTasks.newInstance(usuario.getId()))
+                    .commitNow();
+        }
+        else if (id == R.id.addTarea) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, FragmentNewTask.newInstance(usuario.getId()))
+                    .commitNow();
+        }
+        else if (id == R.id.modificarTarea) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, FragmentModifyTask.newInstance(usuario.getId()))
+                    .commitNow();
+        }
+        else if (id == R.id.mostrarLocalizacion) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, FragmentMapbox.newInstance(usuario.getNick()))
+                    .commitNow();
+        }
+        else if (id == R.id.mostrarContactos) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, FragmentInfoUsers.newInstance())
+                    .commitNow();
+        }
+        else if (id == R.id.jugar) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, FragmentGames.newInstance(usuario.getNick()))
+                    .commitNow();
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) { }
 }

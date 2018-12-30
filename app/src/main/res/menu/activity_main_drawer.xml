@@ -6,15 +6,15 @@
     <item android:title="@string/manageTasks">
         <menu>
             <item
-                android:id="@+id/showTasks"
+                android:id="@+id/mostrarTareas"
                 android:icon="@drawable/ic_menu_share"
                 android:title="@string/showTasks" />
             <item
-                android:id="@+id/addTask"
+                android:id="@+id/addTarea"
                 android:icon="@drawable/ic_menu_share"
                 android:title="@string/addTask" />
             <item
-                android:id="@+id/modifyTask"
+                android:id="@+id/modificarTarea"
                 android:icon="@drawable/ic_menu_send"
                 android:title="@string/modifyTask" />
         </menu>
@@ -23,15 +23,15 @@
     <item android:title="@string/other">
         <menu>
             <item
-                android:id="@+id/showLocation"
+                android:id="@+id/mostrarLocalizacion"
                 android:icon="@drawable/ic_menu_share"
                 android:title="@string/showLocation" />
             <item
-                android:id="@+id/showContacts"
+                android:id="@+id/mostrarContactos"
                 android:icon="@drawable/ic_menu_send"
-                android:title="@string/showContacts" />
+                android:title="Mostrar contactos" />
             <item
-                android:id="@+id/play"
+                android:id="@+id/jugar"
                 android:icon="@drawable/ic_menu_send"
                 android:title="@string/play" />
         </menu>
