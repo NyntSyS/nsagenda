@@ -110,7 +110,7 @@ public class ActivityRegister extends AppCompatActivity {
         }
 
         //  Comprobar nombre de usuario no existe
-        if(!nick.isEmpty()) {
+        if(camposCorrectos && !nick.isEmpty()) {
             btn_registrar.setEnabled(false);
             mostrarRuedaProgreso("Verificando nick...");
             new CheckNick().execute(et_nick.getText().toString());
