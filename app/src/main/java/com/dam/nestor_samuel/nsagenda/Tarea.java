@@ -3,6 +3,7 @@ package com.dam.nestor_samuel.nsagenda;
 import org.threeten.bp.LocalDateTime;
 
 public class Tarea {
+
     int id;
     int color;
     String nombreTarea;

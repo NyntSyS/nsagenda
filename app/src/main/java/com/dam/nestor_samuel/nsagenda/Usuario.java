@@ -1,20 +1,30 @@
 package com.dam.nestor_samuel.nsagenda;
 
-public class Usuario {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Usuario implements Parcelable {
+
     int id;
     String nick;
     String email;
+    String nombre;
+    String apellidos;
 
-    public Usuario(String nick,String email){
+    public Usuario(String nick, String email, String nombre, String apellidos){
         id = 0;
         this.nick = nick;
         this.email = email;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
     }
 
-    public Usuario(int id,String nick,String email){
+    public Usuario(int id, String nick, String email, String nombre, String apellidos){
         this.id = id;
         this.nick = nick;
         this.email = email;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
     }
 
     public int getId() {
@@ -40,4 +50,46 @@ public class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getNombre() { return nombre; }
+
+    public void setNombre(String nombre) { this.nombre = nombre; }
+
+    public String getApellidos() { return apellidos; }
+
+    public void setApellidos(String apellidos) { this.apellidos = apellidos; }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.nick);
+        dest.writeString(this.email);
+        dest.writeString(this.nombre);
+        dest.writeString(this.apellidos);
+    }
+
+    protected Usuario(Parcel in) {
+        this.id = in.readInt();
+        this.nick = in.readString();
+        this.email = in.readString();
+        this.nombre = in.readString();
+        this.apellidos = in.readString();
+    }
+
+    public static final Parcelable.Creator<Usuario> CREATOR = new Parcelable.Creator<Usuario>() {
+        @Override
+        public Usuario createFromParcel(Parcel source) {
+            return new Usuario(source);
+        }
+
+        @Override
+        public Usuario[] newArray(int size) {
+            return new Usuario[size];
+        }
+    };
 }
