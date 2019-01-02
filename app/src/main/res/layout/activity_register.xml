@@ -24,11 +24,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/aRegister_et_nombre"
+
+            <EditText
+                android:id="@+id/aRegister_et_nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Nombre"
                 android:inputType="textPersonName"
-                android:hint="Nombre" />
+                android:maxLength="30" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -36,11 +39,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/aRegister_et_apellidos"
+
+            <EditText
+                android:id="@+id/aRegister_et_apellidos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Apellidos"
                 android:inputType="textPersonName"
-                android:hint="Apellidos" />
+                android:maxLength="60" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -48,11 +54,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/aRegister_et_nick"
+
+            <EditText
+                android:id="@+id/aRegister_et_nick"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Nombre de usuario"
                 android:inputType="textPersonName"
-                android:hint="Nombre de usuario" />
+                android:maxLength="30" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -60,11 +69,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/aRegister_et_email"
+
+            <EditText
+                android:id="@+id/aRegister_et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Correo electrónico"
                 android:inputType="textEmailAddress"
-                android:hint="Correo electrónico" />
+                android:maxLength="60" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -72,11 +84,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/aRegister_et_password"
+
+            <EditText
+                android:id="@+id/aRegister_et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Contraseña"
                 android:inputType="textPassword"
-                android:hint="Contraseña"/>
+                android:maxLength="50" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -84,11 +99,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/aRegister_et_confirmarPassword"
+
+            <EditText
+                android:id="@+id/aRegister_et_confirmarPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Repite la contraseña"
                 android:inputType="textPassword"
-                android:hint="Repite la contraseña"/>
+                android:maxLength="50" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatButton

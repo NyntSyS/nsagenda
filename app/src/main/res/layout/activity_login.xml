@@ -23,11 +23,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/aLogin_et_usuario"
+
+            <EditText
+                android:id="@+id/aLogin_et_usuario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Usuario"
                 android:inputType="text"
-                android:hint="Usuario" />
+                android:maxLength="30" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -35,11 +38,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/aLogin_et_password"
+
+            <EditText
+                android:id="@+id/aLogin_et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Contraseña"
                 android:inputType="textPassword"
-                android:hint="Contraseña"/>
+                android:maxLength="50" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatButton

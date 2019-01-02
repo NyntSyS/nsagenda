@@ -61,7 +61,9 @@ public class ActivityRegister extends AppCompatActivity {
 
     @OnClick(R.id.aRegister_btn_registrar) void crearCuenta() {
         if(verificarCampos()) {
-
+            btn_registrar.setEnabled(false);
+            mostrarRuedaProgreso("Verificando nick...");
+            new CheckNick().execute(et_nick.getText().toString());
         }
     }
 
@@ -107,13 +109,6 @@ public class ActivityRegister extends AppCompatActivity {
             else {
                 et_confirmarPassword.setError(null);
             }
-        }
-
-        //  Comprobar nombre de usuario no existe
-        if(camposCorrectos && !nick.isEmpty()) {
-            btn_registrar.setEnabled(false);
-            mostrarRuedaProgreso("Verificando nick...");
-            new CheckNick().execute(et_nick.getText().toString());
         }
 
         return camposCorrectos;

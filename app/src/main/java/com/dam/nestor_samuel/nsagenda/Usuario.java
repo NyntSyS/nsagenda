@@ -10,6 +10,7 @@ public class Usuario implements Parcelable {
     private String email;
     private String nombre;
     private String apellidos;
+    private String password;
 
     public Usuario(String nick, String email, String nombre, String apellidos){
         id = 0;
@@ -17,6 +18,7 @@ public class Usuario implements Parcelable {
         this.email = email;
         this.nombre = nombre;
         this.apellidos = apellidos;
+        password = "";
     }
 
     public Usuario(int id, String nick, String email, String nombre, String apellidos){
@@ -25,6 +27,16 @@ public class Usuario implements Parcelable {
         this.email = email;
         this.nombre = nombre;
         this.apellidos = apellidos;
+        password = "";
+    }
+
+    public Usuario(int id, String nick, String email, String nombre, String apellidos, String password){
+        this.id = id;
+        this.nick = nick;
+        this.email = email;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.password = password;
     }
 
     public int getId() {
@@ -58,6 +70,10 @@ public class Usuario implements Parcelable {
     public String getApellidos() { return apellidos; }
 
     public void setApellidos(String apellidos) { this.apellidos = apellidos; }
+
+    public String getPassword() { return password; }
+
+    public void setPassword(String password) { this.password = password; }
 
     @Override
     public int describeContents() {
