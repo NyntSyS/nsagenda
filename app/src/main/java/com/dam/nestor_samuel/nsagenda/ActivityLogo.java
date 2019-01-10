@@ -1,11 +1,17 @@
 package com.dam.nestor_samuel.nsagenda;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +26,8 @@ import org.json.JSONObject;
 import org.threeten.bp.format.DateTimeFormatter;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +42,14 @@ public class ActivityLogo extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private ProgressDialog progressDialog;
 
+    private static final int MULTIPLE_PERMISSIONS = 1;
+    private static final String[] PERMISOS = new String[] {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.ACCESS_FINE_LOCATION
+    };
+
     @BindView(R.id.aLogo_iv_logo)
     ImageView iv_logo;
 
@@ -42,13 +58,73 @@ public class ActivityLogo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logo);
 
-        //  TODO: verificar permisos
-
-        int duracion = 2000;
-
         AndroidThreeTen.init(this);
         ButterKnife.bind(this);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        //  TODO: verificar permisos
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            comprobarPermisos();
+        }
+        else {
+            iniciarPrograma();
+        }
+
+    }
+
+    private void comprobarPermisos() {
+
+        int resultado;
+
+        List<String> permisosPendientes = new ArrayList<>();
+
+        for(String permiso : PERMISOS) {
+            resultado = ContextCompat.checkSelfPermission(this, permiso);
+
+            if(resultado != PackageManager.PERMISSION_GRANTED) {
+                permisosPendientes.add(permiso);
+            }
+        }
+
+        if(permisosPendientes.size() > 0) {
+            ActivityCompat.requestPermissions(this,
+                    permisosPendientes.toArray(new String[0]), MULTIPLE_PERMISSIONS);
+        }
+        else {
+            iniciarPrograma();
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        boolean permisosDados = true;
+
+        switch (requestCode) {
+            case MULTIPLE_PERMISSIONS:
+                if(grantResults.length > 0) {
+                    for(int resultadoPermiso : grantResults) {
+                        if(resultadoPermiso == PackageManager.PERMISSION_DENIED) {
+                            permisosDados = false;
+                        }
+                    }
+
+                    if(permisosDados) {
+                        iniciarPrograma();
+                    }
+                    else {
+                        Toast.makeText(this, "Permiso denegado", Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+                }
+                break;
+        }
+    }
+
+    private void iniciarPrograma() {
+
+        int duracion = 2000;    //  Duración del logo
 
         if(sharedPreferences.getBoolean("ocultarLogo", false)) {
             duracion = 0;

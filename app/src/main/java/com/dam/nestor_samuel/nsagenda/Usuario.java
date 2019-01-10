@@ -87,6 +87,7 @@ public class Usuario implements Parcelable {
         dest.writeString(this.email);
         dest.writeString(this.nombre);
         dest.writeString(this.apellidos);
+        dest.writeString(this.password);
     }
 
     protected Usuario(Parcel in) {
@@ -95,6 +96,7 @@ public class Usuario implements Parcelable {
         this.email = in.readString();
         this.nombre = in.readString();
         this.apellidos = in.readString();
+        this.password = in.readString();
     }
 
     public static final Parcelable.Creator<Usuario> CREATOR = new Parcelable.Creator<Usuario>() {
