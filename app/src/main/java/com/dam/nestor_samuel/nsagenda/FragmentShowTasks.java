@@ -63,7 +63,8 @@ public class FragmentShowTasks extends Fragment implements View.OnClickListener 
     private List<ActionCardView> cardViews;
     private OnFragmentInteractionListener mListener;
 
-    private LinearLayout linearLayout;
+    private LinearLayout mainLinearLayout;  //  Layout de todo el fragment
+    private LinearLayout linearLayout;      //  Layout con las tareas
     private ImageButton ibtn_exportar;
     private ImageButton ibtn_actualizar;
     private ImageButton ibtn_fecha;
@@ -105,6 +106,7 @@ public class FragmentShowTasks extends Fragment implements View.OnClickListener 
         mesElegido = LocalDate.now().getMonthValue();
         anyElegido = LocalDate.now().getYear();
 
+        mainLinearLayout = view.findViewById(R.id.aShowTasks_mainLinearLayout);
         linearLayout = view.findViewById(R.id.aShowTasks_linearLayout);
         ibtn_exportar = view.findViewById(R.id.aShowTasks_ibtn_exportar);
         ibtn_actualizar = view.findViewById(R.id.aShowTasks_ibtn_actualizar);
@@ -308,8 +310,12 @@ public class FragmentShowTasks extends Fragment implements View.OnClickListener 
                             .setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
+                                    getActivity().getSupportFragmentManager().beginTransaction()
+                                            .replace(((ViewGroup)getView().getParent()).getId(), FragmentModifyTask.newInstance(id, tarea))
+                                            .addToBackStack(null)
+                                            .commit();
                                     //  TODO: cambiar para que vaya al fragment de modificar
-                                    Toast.makeText(getView().getContext(), "Modificar " + tarea.getNombreTarea(), Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(getView().getContext(), "Modificar " + tarea.getNombreTarea(), Toast.LENGTH_LONG).show();
                                 }
                             })
                             .setTextColor(Color.BLUE)

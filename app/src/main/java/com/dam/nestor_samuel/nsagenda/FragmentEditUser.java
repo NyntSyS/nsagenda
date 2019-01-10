@@ -7,36 +7,40 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.TextView;
 
-public class FragmentModifyTask extends Fragment {
+
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link FragmentEditUser.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link FragmentEditUser#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class FragmentEditUser extends Fragment {
 
     private OnFragmentInteractionListener mListener;
-    private int id;
-    private Tarea tarea;
+    private Usuario usuario;
 
-    public FragmentModifyTask() {
+    public FragmentEditUser() {
         // Required empty public constructor
     }
 
-    public static FragmentModifyTask newInstance(int id, Tarea tarea) {
-
-        FragmentModifyTask fragment = new FragmentModifyTask();
+    public static FragmentEditUser newInstance(Usuario usuario) {
+        FragmentEditUser fragment = new FragmentEditUser();
         Bundle args = new Bundle();
-        args.putInt("ID", id);
-        args.putParcelable("Tarea", tarea);
+        args.putParcelable("Usuario", usuario);
         fragment.setArguments(args);
 
         return fragment;
-
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            id = getArguments().getInt("ID");
-            tarea = getArguments().getParcelable("Tarea");
+            usuario = getArguments().getParcelable("Usuario");
         }
     }
 
@@ -44,10 +48,7 @@ public class FragmentModifyTask extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_modify_task, container, false);
-
-        //  Hacer findViewById en esta parte, añadiendo view. antes, por ejemplo:
-        //  editText = view.findViewById(R.id.editText)
+        View view = inflater.inflate(R.layout.fragment_edit_user, container, false);
 
         return view;
     }

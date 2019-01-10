@@ -17,6 +17,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 public class ActivityMain extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
@@ -25,9 +27,14 @@ public class ActivityMain extends AppCompatActivity implements
         FragmentMapbox.OnFragmentInteractionListener,
         FragmentShowTasks.OnFragmentInteractionListener,
         FragmentGames.OnFragmentInteractionListener,
-        FragmentInfoUsers.OnFragmentInteractionListener {
+        FragmentInfoUsers.OnFragmentInteractionListener,
+        FragmentEditUser.OnFragmentInteractionListener {
 
     private Usuario usuario;
+
+    private TextView tv_nombreUsuario;
+    private TextView tv_emailUsuario;
+    private View headerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +50,16 @@ public class ActivityMain extends AppCompatActivity implements
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        headerView = navigationView.getHeaderView(0);
         navigationView.setNavigationItemSelectedListener(this);
 
         Bundle bundle = getIntent().getExtras();
         usuario = bundle.getParcelable("Usuario");
+
+        tv_nombreUsuario = headerView.findViewById(R.id.aMain_tv_nombreUsuario);
+        tv_emailUsuario = headerView.findViewById(R.id.aMain_tv_emailUsuario);
+        tv_nombreUsuario.setText(usuario.getNombre() + " " + usuario.getApellidos());
+        tv_emailUsuario.setText(usuario.getEmail());
 
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -118,9 +131,9 @@ public class ActivityMain extends AppCompatActivity implements
                     .replace(R.id.container, FragmentNewTask.newInstance(usuario.getId()))
                     .commitNow();
         }
-        else if (id == R.id.modificarTarea) {
+        else if (id == R.id.editarUsuario) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, FragmentModifyTask.newInstance(usuario.getId()))
+                    .replace(R.id.container, FragmentEditUser.newInstance(usuario))
                     .commitNow();
         }
         else if (id == R.id.mostrarLocalizacion) {

@@ -13,15 +13,15 @@
                 android:id="@+id/addTarea"
                 android:icon="@drawable/ic_menu_share"
                 android:title="@string/addTask" />
-            <item
-                android:id="@+id/modificarTarea"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/modifyTask" />
         </menu>
     </item>
 
     <item android:title="@string/other">
         <menu>
+            <item
+                android:id="@+id/editarUsuario"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/editUser" />
             <item
                 android:id="@+id/mostrarLocalizacion"
                 android:icon="@drawable/ic_menu_share"
