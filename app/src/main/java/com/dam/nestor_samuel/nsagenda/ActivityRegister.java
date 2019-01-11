@@ -85,12 +85,12 @@ public class ActivityRegister extends AppCompatActivity {
     private boolean verificarCampos() {
 
         boolean camposCorrectos = true;
-        String password = et_password.getText().toString();
-        String confirmarPassword = et_confirmarPassword.getText().toString();
-        String nick = et_nick.getText().toString();
+        String password;
+        String confirmarPassword;
 
         //  Comprobar si campos están vacios
         for(EditText et : campos) {
+            et.setText(et.getText().toString().trim());
             if(et.getText().toString().isEmpty()) {
                 et.setError("El campo no puede estar vacio");
                 camposCorrectos = false;
@@ -99,6 +99,9 @@ public class ActivityRegister extends AppCompatActivity {
                 et.setError(null);
             }
         }
+
+        password = et_password.getText().toString();
+        confirmarPassword = et_confirmarPassword.getText().toString();
 
         //  Comprobar contraseñas coinciden
         if(!password.isEmpty() && !confirmarPassword.isEmpty()) {
@@ -129,7 +132,7 @@ public class ActivityRegister extends AppCompatActivity {
 
         OkHttpClient client;
 
-        final String URL = "https://nesdam2018.000webhostapp.com/verificar_nick.php";
+        final String URL = ServicioWeb.PAGINA_BASE + "verificar_nick.php";
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
         @Override
@@ -196,7 +199,7 @@ public class ActivityRegister extends AppCompatActivity {
 
         OkHttpClient client;
 
-        final String URL = "https://nesdam2018.000webhostapp.com/insertar_usuario.php";
+        final String URL = ServicioWeb.PAGINA_BASE + "insertar_usuario.php";
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
         @Override
@@ -285,7 +288,7 @@ public class ActivityRegister extends AppCompatActivity {
         Usuario usuario;
         String md5Password;
 
-        final String URL = "https://nesdam2018.000webhostapp.com/acceder.php";
+        final String URL = ServicioWeb.PAGINA_BASE + "acceder.php";
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
         @Override

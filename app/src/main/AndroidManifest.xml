@@ -30,9 +30,19 @@
             android:name=".ActivityMain"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ActivityLogin"></activity>
-        <activity android:name=".ActivityRegister"></activity>
+        <activity
+            android:name=".ActivityLogin"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ActivityRegister"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity android:name=".ActivityPreferences"></activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

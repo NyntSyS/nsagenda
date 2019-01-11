@@ -62,7 +62,6 @@ public class ActivityLogo extends AppCompatActivity {
         ButterKnife.bind(this);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        //  TODO: verificar permisos
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             comprobarPermisos();
         }
@@ -178,7 +177,7 @@ public class ActivityLogo extends AppCompatActivity {
         Usuario usuario;
         String md5Password;
 
-        final String URL = "https://nesdam2018.000webhostapp.com/acceder.php";
+        final String URL = ServicioWeb.PAGINA_BASE + "acceder.php";
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
         @Override

@@ -75,6 +75,16 @@ public class Usuario implements Parcelable {
 
     public void setPassword(String password) { this.password = password; }
 
+    public void copiarUsuario(Usuario usuario, String passwordMD5) {
+        id = usuario.id;
+        nick = usuario.nick;
+        email = usuario.email;
+        nombre = usuario.nombre;
+        apellidos = usuario.apellidos;
+        if(!passwordMD5.isEmpty())
+            password = passwordMD5;
+    }
+
     @Override
     public int describeContents() {
         return 0;

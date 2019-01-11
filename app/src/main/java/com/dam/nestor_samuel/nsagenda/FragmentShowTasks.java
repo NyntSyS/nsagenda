@@ -229,7 +229,7 @@ public class FragmentShowTasks extends Fragment implements View.OnClickListener 
 
         OkHttpClient client;
 
-        final String URL = "https://nesdam2018.000webhostapp.com/leer_tareas.php";
+        final String URL = ServicioWeb.PAGINA_BASE + "leer_tareas.php";
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
         @Override
@@ -314,8 +314,6 @@ public class FragmentShowTasks extends Fragment implements View.OnClickListener 
                                             .replace(((ViewGroup)getView().getParent()).getId(), FragmentModifyTask.newInstance(id, tarea))
                                             .addToBackStack(null)
                                             .commit();
-                                    //  TODO: cambiar para que vaya al fragment de modificar
-                                    //Toast.makeText(getView().getContext(), "Modificar " + tarea.getNombreTarea(), Toast.LENGTH_LONG).show();
                                 }
                             })
                             .setTextColor(Color.BLUE)
@@ -378,7 +376,7 @@ public class FragmentShowTasks extends Fragment implements View.OnClickListener 
 
         OkHttpClient client;
 
-        final String URL = "https://nesdam2018.000webhostapp.com/exportar_tareas.php";
+        final String URL = ServicioWeb.PAGINA_BASE + "exportar_tareas.php";
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
         @Override
