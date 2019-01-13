@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
@@ -32,6 +34,7 @@ public class FragmentMapbox extends Fragment {
     private MapboxMap mbm;
     private LocationManager lm;
 
+    private TextView tv_error;
     private Button btn_actualizar;
 
     public FragmentMapbox() {
@@ -64,6 +67,7 @@ public class FragmentMapbox extends Fragment {
         Mapbox.getInstance(getContext(), "pk.eyJ1IjoibnN5cyIsImEiOiJjanBqdTNjc3gwOXQ2M3dxZGV2eGM5ZnRoIn0.fVMUE1Uu9n9yhfYYqwFLbA");
         View view = inflater.inflate(R.layout.fragment_mapbox, container, false);
 
+        tv_error = view.findViewById(R.id.fMapBox_tv_error);
         btn_actualizar = view.findViewById(R.id.fMapBox_btn_actualizar);
         mapView = (MapView) view.findViewById(R.id.fMapBox_mapbox);
         mapView.onCreate(savedInstanceState);
@@ -71,14 +75,23 @@ public class FragmentMapbox extends Fragment {
         if(gpsActivado()) {
             mostrarPosicion();
         }
+        else {
+            mapView.setVisibility(View.GONE);
+            tv_error.setVisibility(View.VISIBLE);
+        }
 
         btn_actualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if(!gpsActivado()) {    //  Si no está el GPS activado no hace nada
+                    mapView.setVisibility(View.GONE);
+                    tv_error.setVisibility(View.VISIBLE);
                     return;
                 }
+
+                mapView.setVisibility(View.VISIBLE);
+                tv_error.setVisibility(View.GONE);
 
                 Location location;
                 double latitud;
@@ -139,10 +152,6 @@ public class FragmentMapbox extends Fragment {
         try {
             networkActivada = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         } catch(Exception ex) {}
-
-        Log.e("--ERROR", gpsActivado + " / " + networkActivada);
-
-        btn_actualizar.setText(gpsActivado + " / " + networkActivada);
 
         return (gpsActivado && networkActivada);
 
