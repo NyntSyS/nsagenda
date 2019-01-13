@@ -3,6 +3,13 @@
     package="com.dam.nestor_samuel.nsagenda">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature android:name="android.hardware.location.gps" />
+    <uses-feature android:name="android.hardware.location.network" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +18,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActivityLogo">
+        <activity
+            android:name=".ActivityLogo"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,9 +31,22 @@
             android:name=".ActivityMain"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ActivityLogin"></activity>
-        <activity android:name=".ActivityRegister"></activity>
-        <activity android:name=".ActivityPreferences"></activity>
+        <activity
+            android:name=".ActivityLogin"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ActivityRegister"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ActivityPreferences" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <activity
+            android:name=".ActivityAcceleroDodge"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

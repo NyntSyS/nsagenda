@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.libizo.CustomEditText;
 
@@ -17,16 +18,18 @@ public class FragmentModifyTask extends Fragment {
     private CustomEditText nombreTarea;
     private CustomEditText descripcionTarea;
 
+    private Tarea tarea;
 
     public FragmentModifyTask() {
         // Required empty public constructor
     }
 
-    public static FragmentModifyTask newInstance(int id) {
+    public static FragmentModifyTask newInstance(int id, Tarea tarea) {
 
         FragmentModifyTask fragment = new FragmentModifyTask();
         Bundle args = new Bundle();
         args.putInt("ID", id);
+        args.putParcelable("Tarea", tarea);
         fragment.setArguments(args);
 
         return fragment;
@@ -38,6 +41,7 @@ public class FragmentModifyTask extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             id = getArguments().getInt("ID");
+            tarea = getArguments().getParcelable("Tarea");
         }
     }
 
@@ -45,7 +49,12 @@ public class FragmentModifyTask extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_modify_task, container, false);
+        View view = inflater.inflate(R.layout.fragment_modify_task, container, false);
+
+        //  Hacer findViewById en esta parte, añadiendo view. antes, por ejemplo:
+        //  editText = view.findViewById(R.id.editText)
+
+        return view;
     }
 
     @Override

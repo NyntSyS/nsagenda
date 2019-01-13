@@ -1,8 +1,11 @@
 package com.dam.nestor_samuel.nsagenda;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.threeten.bp.LocalDateTime;
 
-public class Tarea {
+public class Tarea implements Parcelable {
 
     private int id;
     private int color;
@@ -65,4 +68,38 @@ public class Tarea {
     public void setColor(int color) {
         this.color = color;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeInt(this.color);
+        dest.writeString(this.nombreTarea);
+        dest.writeString(this.descripcion);
+        dest.writeSerializable(this.fechaTarea);
+    }
+
+    protected Tarea(Parcel in) {
+        this.id = in.readInt();
+        this.color = in.readInt();
+        this.nombreTarea = in.readString();
+        this.descripcion = in.readString();
+        this.fechaTarea = (LocalDateTime) in.readSerializable();
+    }
+
+    public static final Parcelable.Creator<Tarea> CREATOR = new Parcelable.Creator<Tarea>() {
+        @Override
+        public Tarea createFromParcel(Parcel source) {
+            return new Tarea(source);
+        }
+
+        @Override
+        public Tarea[] newArray(int size) {
+            return new Tarea[size];
+        }
+    };
 }

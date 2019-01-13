@@ -11,28 +11,28 @@
                 android:title="@string/showTasks" />
             <item
                 android:id="@+id/addTarea"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/icon_add_tarea"
                 android:title="@string/addTask" />
-            <item
-                android:id="@+id/modificarTarea"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/modifyTask" />
         </menu>
     </item>
 
     <item android:title="@string/other">
         <menu>
             <item
+                android:id="@+id/editarUsuario"
+                android:icon="@drawable/icon_editar_usuario"
+                android:title="@string/editUser" />
+            <item
                 android:id="@+id/mostrarLocalizacion"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/icon_gps"
                 android:title="@string/showLocation" />
             <item
                 android:id="@+id/mostrarContactos"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/icon_contactos"
                 android:title="Mostrar contactos" />
             <item
                 android:id="@+id/jugar"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/icon_jugar"
                 android:title="@string/play" />
         </menu>
     </item>

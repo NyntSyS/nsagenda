@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="Datos de usuario">
-        <EditTextPreference
-            android:key="nombre"
-            android:title="Nombre"
-            android:summary="Establecer nombre"
-            android:dialogTitle="Nombre" />
-
-        <EditTextPreference
-            android:key="apellidos"
-            android:title="Apellidos"
-            android:summary="Establecer apellidos"
-            android:dialogTitle="Apellidos" />
-
-        <EditTextPreference
-            android:key="email"
-            android:title="Correo electrónico"
-            android:summary="Establecer correo electrónico"
-            android:dialogTitle="Correo electrónico" />
-    </PreferenceCategory>
-
     <PreferenceCategory android:title="Ajustes">
         <CheckBoxPreference
             android:key="ocultarLogo"

@@ -107,7 +107,7 @@ public class ActivityLogin extends AppCompatActivity {
         OkHttpClient client;
         Usuario usuario;
 
-        final String URL = "https://nesdam2018.000webhostapp.com/acceder.php";
+        final String URL = ServicioWeb.PAGINA_BASE + "acceder.php";
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
         @Override
