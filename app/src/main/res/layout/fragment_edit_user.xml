@@ -103,9 +103,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Dejar vacio para mantener contraseña antigua"
-                android:textAllCaps="false"
                 android:textColor="@color/azulOscuro"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="10dp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout

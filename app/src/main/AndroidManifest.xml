@@ -32,17 +32,20 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ActivityLogin"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".ActivityRegister"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity android:name=".ActivityPreferences"></activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ActivityPreferences" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <activity
+            android:name=".ActivityAcceleroDodge"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
