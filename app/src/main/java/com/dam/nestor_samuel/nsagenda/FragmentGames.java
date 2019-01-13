@@ -85,7 +85,7 @@ public class FragmentGames extends Fragment {
         Cursor c = db.rawQuery(query, args);
 
         if(c.moveToNext()) {
-            tv_maxima_puntuacion.setText(c.getString(0) + " " + c.getLong(1));
+            tv_maxima_puntuacion.setText(c.getString(0) + "\t" + c.getLong(1));
         }
         else {
             tv_maxima_puntuacion.setText("(Sin registros)");

@@ -63,7 +63,6 @@ public class FragmentShowTasks extends Fragment implements View.OnClickListener 
     private List<ActionCardView> cardViews;
     private OnFragmentInteractionListener mListener;
 
-    private LinearLayout mainLinearLayout;  //  Layout de todo el fragment
     private LinearLayout linearLayout;      //  Layout con las tareas
     private ImageButton ibtn_exportar;
     private ImageButton ibtn_actualizar;
@@ -106,11 +105,10 @@ public class FragmentShowTasks extends Fragment implements View.OnClickListener 
         mesElegido = LocalDate.now().getMonthValue();
         anyElegido = LocalDate.now().getYear();
 
-        mainLinearLayout = view.findViewById(R.id.aShowTasks_mainLinearLayout);
-        linearLayout = view.findViewById(R.id.aShowTasks_linearLayout);
-        ibtn_exportar = view.findViewById(R.id.aShowTasks_ibtn_exportar);
-        ibtn_actualizar = view.findViewById(R.id.aShowTasks_ibtn_actualizar);
-        ibtn_fecha = view.findViewById(R.id.aShowTasks_ibtn_fecha);
+        linearLayout = view.findViewById(R.id.fShowTasks_linearLayout);
+        ibtn_exportar = view.findViewById(R.id.fShowTasks_ibtn_exportar);
+        ibtn_actualizar = view.findViewById(R.id.fShowTasks_ibtn_actualizar);
+        ibtn_fecha = view.findViewById(R.id.fShowTasks_ibtn_fecha);
 
         ibtn_exportar.setOnClickListener(this);
         ibtn_actualizar.setOnClickListener(this);
@@ -127,7 +125,7 @@ public class FragmentShowTasks extends Fragment implements View.OnClickListener 
 
         switch (v.getId()) {
 
-            case R.id.aShowTasks_ibtn_exportar:
+            case R.id.fShowTasks_ibtn_exportar:
                 String[] lista = {"Fecha elegida", "Dentro de un mes", "Todas las tareas"};
 
                 AlertDialog alertDialog = new AlertDialog.Builder(getContext())
@@ -158,13 +156,13 @@ public class FragmentShowTasks extends Fragment implements View.OnClickListener 
                 alertDialog.show();
                 break;
 
-            case R.id.aShowTasks_ibtn_actualizar:
+            case R.id.fShowTasks_ibtn_actualizar:
                 limpiarTareas();
                 mostrarRuedaProgreso("Leyendo datos...");
                 new GetTasks().execute(""+id, anyElegido+"-"+mesElegido+"-"+diaElegido);
                 break;
 
-            case R.id.aShowTasks_ibtn_fecha:
+            case R.id.fShowTasks_ibtn_fecha:
                 int diaActual = LocalDate.now().getDayOfMonth();
                 int mesActual = LocalDate.now().getMonthValue()-1;  //  Mes empieza por 0
                 int anyActual = LocalDate.now().getYear();

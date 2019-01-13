@@ -260,10 +260,9 @@ public class ActivityMain extends AppCompatActivity implements
             RequestBody body;           // Cuerpo de la petición con los datos
             Request request;            // Petición a la página web
             Response response;          // Respuesta del servidor
-            TelephonyManager tManager;  // Objeto para obtener información del teléfono del usuario
             Cursor contactos;           // Cursor para recorrer la lista de contactos
 
-            String telefono = strings[0];
+            String telefono = strings[0];   // Número de teléfono donde se ejecuta la aplicación
 
             try {
                 client = new OkHttpClient();

@@ -45,7 +45,7 @@ public class ActivityAcceleroDodge extends AppCompatActivity implements SensorEv
     private int margenHorizontal;
     private int margenVertical;
     private long intervaloCrearEnemigos;
-    private float velocidadEnemigos;
+    private float velocidadEnemigos;    //  Basado en ancho de pantalla
     public Ball ball;
 
     public final static int DIAMETRO_BOLA_BASE = 60;
@@ -54,7 +54,7 @@ public class ActivityAcceleroDodge extends AppCompatActivity implements SensorEv
     public final static float PORCENTAJE_MARGENES = 0.10f;
     public final static long INTERVALO_INICIAL = 3000;
     public final static long INTERVALO_MINIMO = 600;
-    public final static float VELOCIDAD_INICIAL = 10f;
+    public final static float VELOCIDAD_INICIAL_BASE = 10f;
 
     private Bitmap ballBitmap;
     private Bitmap enemyBitmap;
@@ -122,7 +122,7 @@ public class ActivityAcceleroDodge extends AppCompatActivity implements SensorEv
         vidas = 3;
         puntuacion = 0;
         intervaloCrearEnemigos = INTERVALO_INICIAL;
-        velocidadEnemigos = VELOCIDAD_INICIAL;
+        velocidadEnemigos = (VELOCIDAD_INICIAL_BASE*xMax) / ANCHO_PANTALLA_BASE;
 
         final Handler crearEnemigos = new Handler();
         final Handler reducirIntervaloAparicion = new Handler();
