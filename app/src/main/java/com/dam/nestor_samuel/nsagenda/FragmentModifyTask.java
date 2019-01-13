@@ -8,10 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.libizo.CustomEditText;
+
 public class FragmentModifyTask extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private int id;
+    private CustomEditText nombreTarea;
+    private CustomEditText descripcionTarea;
+
 
     public FragmentModifyTask() {
         // Required empty public constructor

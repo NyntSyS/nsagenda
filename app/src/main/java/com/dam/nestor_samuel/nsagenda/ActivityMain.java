@@ -15,6 +15,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.llollox.androidtoggleswitch.widgets.MultipleToggleSwitch;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ActivityMain extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
@@ -26,6 +32,7 @@ public class ActivityMain extends AppCompatActivity implements
         FragmentInfoUsers.OnFragmentInteractionListener {
 
     private Usuario usuario;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
