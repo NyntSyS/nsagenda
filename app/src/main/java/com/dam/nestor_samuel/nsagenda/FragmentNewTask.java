@@ -266,17 +266,26 @@ public class FragmentNewTask extends Fragment {
             nombreTarea.setError("El campo no puede estar vacío");
             camposCorrectos = false;
         }
+        else{
+            nombreTarea.setError(null);
+        }
 
         if(idRGdiaSemana  == 1 && tvMostrarFecha.getText().toString().isEmpty()){
             tvMostrarFecha.requestFocus();
             tvMostrarFecha.setError("El campo no puede estar vacío");
             camposCorrectos = false;
         }
+        else{
+            tvMostrarFecha.setError(null);
+        }
 
         if(tvMostrarHora.getText().toString().isEmpty()){
             tvMostrarHora.requestFocus();
             tvMostrarHora.setError("El campo no puede estar vacío");
             camposCorrectos = false;
+        }
+        else{
+            tvMostrarHora.setError(null);
         }
 
         if(idRGdiaSemana == 2){
