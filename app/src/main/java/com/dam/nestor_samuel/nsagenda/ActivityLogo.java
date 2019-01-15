@@ -113,7 +113,7 @@ public class ActivityLogo extends AppCompatActivity {
                         iniciarPrograma();
                     }
                     else {
-                        Toast.makeText(this, "Permiso denegado", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "No se han autorizado todos los permisos", Toast.LENGTH_LONG).show();
                         finish();
                     }
                 }
@@ -223,10 +223,10 @@ public class ActivityLogo extends AppCompatActivity {
                 response.close();
             }
             catch (JSONException jsone) {
-                Log.e("--ERROR--", "Error al parsear JSON");    //  Borrar más adelante
+                Log.e("--ERROR--", "Error al parsear JSON");
             }
             catch(IOException ioe) {
-                Log.e("--ERROR--", "Error al realizar petición");    //  Borrar más adelante
+                Log.e("--ERROR--", "Error al realizar petición");
             }
 
             return loginCorrecto;

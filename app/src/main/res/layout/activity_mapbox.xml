@@ -5,22 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".FragmentMapbox">
+    tools:context=".ActivityMapbox">
 
     <com.mapbox.mapboxsdk.maps.MapView
-        android:id="@+id/fMapBox_mapbox"
+        android:id="@+id/aMapBox_mapbox"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10"
         app:mapbox_cameraTargetLat="38.4044399"
         app:mapbox_cameraTargetLng="-0.5317506"
-        app:mapbox_cameraZoom="15"
+        app:mapbox_cameraZoom="10"
         app:mapbox_styleUrl="mapbox://styles/mapbox/streets-v10">
 
     </com.mapbox.mapboxsdk.maps.MapView>
 
     <TextView
-        android:id="@+id/fMapBox_tv_error"
+        android:id="@+id/aMapBox_tv_error"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10"
@@ -30,12 +30,10 @@
         android:text="No se pudo acceder al GPS" />
 
     <Button
-        android:id="@+id/fMapBox_btn_actualizar"
+        android:id="@+id/aMapBox_btn_actualizar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:enabled="false"
         android:text="Actualizar posición" />
-
-
-
 </LinearLayout>

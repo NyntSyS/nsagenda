@@ -5,12 +5,16 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 /*import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;*/
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -53,7 +57,6 @@ public class ActivityMain extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
         FragmentNewTask.OnFragmentInteractionListener,
         FragmentModifyTask.OnFragmentInteractionListener,
-        FragmentMapbox.OnFragmentInteractionListener,
         FragmentShowTasks.OnFragmentInteractionListener,
         FragmentGames.OnFragmentInteractionListener,
         FragmentInfoUsers.OnFragmentInteractionListener,
@@ -64,6 +67,11 @@ public class ActivityMain extends AppCompatActivity implements
     private TextView tv_nombreUsuario;
     private TextView tv_emailUsuario;
     private View headerView;
+
+    public static boolean gpsAccesible;
+    public static LocationManager locationManager;
+    public static double latitud;
+    public static double longitud;
 
 
     @Override
@@ -91,6 +99,24 @@ public class ActivityMain extends AppCompatActivity implements
         tv_nombreUsuario.setText(usuario.getNombre() + " " + usuario.getApellidos());
         tv_emailUsuario.setText(usuario.getEmail());
 
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        latitud = 0.0d;
+        longitud = 0.0d;
+
+        if(gpsActivado()) {
+            try {
+                locationManager.requestLocationUpdates(
+                        LocationManager.NETWORK_PROVIDER,
+                        0,
+                        0,
+                        locationListener);
+            }
+            catch (SecurityException se) {
+                Log.e("--ERROR", "Error al activar el localizador GPS");
+                gpsAccesible = false;
+            }
+        }
+
         new SavePhone().execute();
 
         if(savedInstanceState == null) {
@@ -99,6 +125,46 @@ public class ActivityMain extends AppCompatActivity implements
                     .commitNow();
         }
     }
+
+    private boolean gpsActivado() {
+
+        boolean networkActivada = false;
+
+        try {
+            networkActivada = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        } catch(Exception ex) {}
+
+        gpsAccesible = networkActivada;
+
+        return gpsAccesible;
+
+    }
+
+    public final LocationListener locationListener = new LocationListener() {
+
+        @Override
+        public void onLocationChanged(Location location) {
+            if(location != null) {
+                latitud = location.getLatitude();
+                longitud = location.getLongitude();
+            }
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
 
     @Override
     public void onBackPressed() {
@@ -169,9 +235,11 @@ public class ActivityMain extends AppCompatActivity implements
                     .commitNow();
         }
         else if (id == R.id.mostrarLocalizacion) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, FragmentMapbox.newInstance(usuario.getNick()))
-                    .commitNow();
+            Intent intent = new Intent(this, ActivityMapbox.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("Nick", usuario.getNick());
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
         else if (id == R.id.mostrarContactos) {
             getSupportFragmentManager().beginTransaction()

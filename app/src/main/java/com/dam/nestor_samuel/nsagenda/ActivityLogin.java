@@ -151,10 +151,10 @@ public class ActivityLogin extends AppCompatActivity {
                 response.close();
             }
             catch (JSONException jsone) {
-                Log.e("--ERROR--", "Error al parsear JSON");    //  Borrar más adelante
+                Log.e("--ERROR--", "Error al parsear JSON");
             }
             catch(IOException ioe) {
-                Log.e("--ERROR--", "Error al realizar petición");    //  Borrar más adelante
+                Log.e("--ERROR--", "Error al realizar petición");
             }
 
             return loginCorrecto;
@@ -171,7 +171,7 @@ public class ActivityLogin extends AppCompatActivity {
                 md5Password = number.toString(16);
             }
             catch (NoSuchAlgorithmException nsae) {
-                Log.e("--ERROR--", "Algoritmo de encriptación incorrecto"); //  Borrar más adelante
+                Log.e("--ERROR--", "Algoritmo de encriptación incorrecto");
             }
 
             return md5Password;
@@ -200,7 +200,7 @@ public class ActivityLogin extends AppCompatActivity {
             }
             else {
                 btn_login.setEnabled(true);
-                Toast.makeText(getBaseContext(), "Acceso incorrecto", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "No se pudo iniciar sesión", Toast.LENGTH_LONG).show();
             }
 
         }

@@ -114,7 +114,7 @@ public class FragmentShowTasks extends Fragment implements View.OnClickListener 
         ibtn_actualizar.setOnClickListener(this);
         ibtn_fecha.setOnClickListener(this);
 
-        mostrarRuedaProgreso("Leyendo datos...");   //  Comentar para cargar sin mostrar mensaje
+        mostrarRuedaProgreso("Leyendo datos...");
         new GetTasks().execute(""+id, anyElegido+"-"+mesElegido+"-"+diaElegido);
 
         return view;
@@ -273,10 +273,10 @@ public class FragmentShowTasks extends Fragment implements View.OnClickListener 
                 response.close();
             }
             catch (JSONException jsone) {
-                Log.e("--ERROR--", "Error al parsear JSON");    //  Borrar más adelante
+                Log.e("--ERROR--", "Error al parsear JSON");
             }
             catch(IOException ioe) {
-                Log.e("--ERROR--", "Error al realizar petición");    //  Borrar más adelante
+                Log.e("--ERROR--", "Error al realizar petición");
             }
 
             return tareas;
@@ -463,13 +463,13 @@ public class FragmentShowTasks extends Fragment implements View.OnClickListener 
                 response.close();
             }
             catch (JSONException jsone) {
-                Log.e("--ERROR--", "Error al parsear JSON");    //  Borrar más adelante
+                Log.e("--ERROR--", "Error al parsear JSON");
             }
             catch(IOException ioe) {
-                Log.e("--ERROR--", "Error al realizar petición");    //  Borrar más adelante
+                Log.e("--ERROR--", "Error al realizar petición");
             }
             catch (Exception e) {
-                Log.e("--ERROR--", "Error general");    //  Borrar más adelante
+                Log.e("--ERROR--", "Error general");
             }
             finally {
                 if(printWriter != null)

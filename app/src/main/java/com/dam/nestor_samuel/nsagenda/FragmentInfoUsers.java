@@ -169,7 +169,8 @@ public class FragmentInfoUsers extends Fragment {
                             String numero = contactos.getString(contactos
                                     .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 
-                            if(contactosEnBD.contains(nombre)) {
+                            //  Para ver qué contactos actuales han usado alguna vez la aplicación
+                            if(contactosEnBD.contains(numero)) {
                                 listaContactos.put(numero, nombre);
                             }
                         }

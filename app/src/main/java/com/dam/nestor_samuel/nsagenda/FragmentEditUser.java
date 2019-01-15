@@ -228,10 +228,10 @@ public class FragmentEditUser extends Fragment {
                 response.close();
             }
             catch (JSONException jsone) {
-                Log.e("--ERROR--", "Error al parsear JSON");    //  Borrar más adelante
+                Log.e("--ERROR--", "Error al parsear JSON");
             }
             catch(IOException ioe) {
-                Log.e("--ERROR--", "Error al realizar petición");    //  Borrar más adelante
+                Log.e("--ERROR--", "Error al realizar petición");
             }
 
             return nickExiste;
@@ -319,10 +319,10 @@ public class FragmentEditUser extends Fragment {
                 response.close();
             }
             catch (JSONException jsone) {
-                Log.e("--ERROR--", "Error al parsear JSON");    //  Borrar más adelante
+                Log.e("--ERROR--", "Error al parsear JSON");
             }
             catch(IOException ioe) {
-                Log.e("--ERROR--", "Error al realizar petición");    //  Borrar más adelante
+                Log.e("--ERROR--", "Error al realizar petición");
             }
 
             return usuarioActualizado;
@@ -340,7 +340,7 @@ public class FragmentEditUser extends Fragment {
                 md5Password = number.toString(16);
             }
             catch (NoSuchAlgorithmException nsae) {
-                Log.e("--ERROR--", "Algoritmo de encriptación incorrecto"); //  Borrar más adelante
+                Log.e("--ERROR--", "Algoritmo de encriptación incorrecto");
             }
 
             return md5Password;

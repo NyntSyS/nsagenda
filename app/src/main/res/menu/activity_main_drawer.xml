@@ -7,7 +7,7 @@
         <menu>
             <item
                 android:id="@+id/mostrarTareas"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/icon_ver_tareas"
                 android:title="@string/showTasks" />
             <item
                 android:id="@+id/addTarea"

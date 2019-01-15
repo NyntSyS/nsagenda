@@ -2,6 +2,7 @@ package com.dam.nestor_samuel.nsagenda;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -17,7 +18,11 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,10 +37,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class ActivityAcceleroDodge extends AppCompatActivity implements SensorEventListener {
 
-    public float xPosition, xAcceleration, xVelocity = 0.0f;
-    public float yPosition, yAcceleration, yVelocity = 0.0f;
-    public float xMax, yMax;
-    public float frameTime = 0.666f;
+    private float xPosition, xAcceleration, xVelocity = 0.0f;
+    private float yPosition, yAcceleration, yVelocity = 0.0f;
+    private float xMax, yMax;
+    private float frameTime = 0.666f;
 
     private int vidas;
     private int puntuacion;
@@ -46,20 +51,26 @@ public class ActivityAcceleroDodge extends AppCompatActivity implements SensorEv
     private int margenVertical;
     private long intervaloCrearEnemigos;
     private float velocidadEnemigos;    //  Basado en ancho de pantalla
-    public Ball ball;
+    private Ball ball;
 
-    public final static int DIAMETRO_BOLA_BASE = 60;
-    public final static int ANCHO_PANTALLA_BASE = 1080;
-    public final static int ALTO_PANTALLA_BASE = 1920;
-    public final static float PORCENTAJE_MARGENES = 0.10f;
-    public final static long INTERVALO_INICIAL = 3000;
-    public final static long INTERVALO_MINIMO = 600;
-    public final static float VELOCIDAD_INICIAL_BASE = 10f;
+    private final static int DIAMETRO_BOLA_BASE = 60;
+    private final static int ANCHO_PANTALLA_BASE = 1080;
+    private final static int ALTO_PANTALLA_BASE = 1920;
+    private final static float PORCENTAJE_MARGENES = 0.10f;
+    private final static long INTERVALO_INICIAL = 3000;
+    private final static long INTERVALO_MINIMO = 600;
+    private final static float VELOCIDAD_INICIAL_BASE = 10f;
 
     private Bitmap ballBitmap;
     private Bitmap enemyBitmap;
     private SensorManager sensorManager = null;
 
+    private boolean saliendo;
+    private boolean musicaDesactivada;
+    private MediaPlayer mediaPlayer;
+    private int sonido;
+    private SoundPool soundPool;
+    private SharedPreferences sharedPreferences;
     private String nick;
     private SQLiteDatabase db;
     private DatabaseAcceleroDodge database;
@@ -69,8 +80,13 @@ public class ActivityAcceleroDodge extends AppCompatActivity implements SensorEv
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_accelero_dodge);
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        musicaDesactivada = sharedPreferences.getBoolean("musicaJuego", false);
+
         Bundle bundle = getIntent().getExtras();
         nick = bundle.getString("Nick");
+
+        saliendo = false;
 
         database = new DatabaseAcceleroDodge(this, "Records", null, 1);
         db = database.getWritableDatabase();
@@ -160,6 +176,32 @@ public class ActivityAcceleroDodge extends AppCompatActivity implements SensorEv
 
         jugando = true;
 
+        if(!musicaDesactivada) {
+            soundPool = new SoundPool(8, AudioManager.STREAM_MUSIC, 0);
+            sonido = soundPool.load(this, R.raw.impact, 1);
+            cargarMusica();
+        }
+
+    }
+
+    private void pararMusica() {
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        mediaPlayer = null;
+    }
+
+    private void cargarMusica() {
+        mediaPlayer = MediaPlayer.create(this, R.raw.musica);
+
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                pararMusica();
+                cargarMusica();
+            }
+        });
+
+        mediaPlayer.start();
     }
 
     private void cargarImagenesObjetos() {
@@ -255,6 +297,27 @@ public class ActivityAcceleroDodge extends AppCompatActivity implements SensorEv
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
+    @Override
+    public void onBackPressed() {
+        jugando = false;
+        if(!musicaDesactivada && mediaPlayer.isPlaying()) {
+            pararMusica();
+        }
+        dialogoFinPartida("Partida cancelada");
+    }
+
+    @Override
+    protected void onPause() {
+        jugando = false;
+        if(!musicaDesactivada && mediaPlayer != null && mediaPlayer.isPlaying()) {
+            pararMusica();
+        }
+
+        if(!saliendo) {
+            dialogoFinPartida("Partida cancelada");
+        }
+        super.onPause();
+    }
 
     public class Ball extends View {
 
@@ -307,34 +370,21 @@ public class ActivityAcceleroDodge extends AppCompatActivity implements SensorEv
                     enemyBalls.remove(enemyBalls.get(i));
                 }
                 else if(enemyBalls.get(i).colision(xPosition, yPosition)) {
+                    if(!musicaDesactivada) {
+                        soundPool.play(sonido, 1f, 1f, 0, 0, 1);
+                    }
                     //  TODO: reproducir sonido de colision
                     enemyBalls.remove(enemyBalls.get(i));
                     vidas--;
 
                     if(vidas <= 0) {
-                        //  TODO: parar música (opcional, fadeOut)
                         jugando = false;
+                        if(!musicaDesactivada) {
+                            pararMusica();
+                        }
                         actualizarBaseDatos(puntuacion);
+                        dialogoFinPartida("Puntuación: " + puntuacion);
 
-                        AlertDialog alertDialog = new AlertDialog.Builder(ActivityAcceleroDodge.this)
-                                .setMessage("Puntuación: " + puntuacion)
-                                .setPositiveButton("Jugar otra vez", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        //  TODO: reiniciar música
-                                        configurarFlagsPantalla();
-                                        crearPartida();
-                                    }
-                                })
-                                .setNegativeButton("Salir", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        finish();
-                                    }
-                                })
-                                .create();
-
-                        alertDialog.show();
                     }
                 }
                 else {
@@ -350,6 +400,30 @@ public class ActivityAcceleroDodge extends AppCompatActivity implements SensorEv
             invalidate();
 
         }
+
+    }
+
+    private void dialogoFinPartida(String mensaje) {
+
+        AlertDialog alertDialog = new AlertDialog.Builder(ActivityAcceleroDodge.this)
+                .setMessage(mensaje)
+                .setPositiveButton("Jugar otra vez", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        configurarFlagsPantalla();
+                        crearPartida();
+                    }
+                })
+                .setNegativeButton("Salir", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        saliendo = true;
+                        finish();
+                    }
+                })
+                .create();
+
+        alertDialog.show();
 
     }
 

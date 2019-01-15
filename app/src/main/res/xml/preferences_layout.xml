@@ -8,9 +8,9 @@
             android:summary="Activa o desactiva el logo al iniciar la aplicación" />
 
         <CheckBoxPreference
-            android:key="musicaJuegos"
-            android:title="Música en juegos"
-            android:summary="Activa o desactiva la música de los juegos" />
+            android:key="musicaJuego"
+            android:title="Desactivar música"
+            android:summary="Activa o desactiva la música del juego" />
 
         <CheckBoxPreference
             android:key="loginAutomatico"

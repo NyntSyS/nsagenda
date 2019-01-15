@@ -239,7 +239,7 @@ public class FragmentModifyTask extends Fragment {
 
         OkHttpClient client;
 
-        final String URL = "https://nesdam2018.000webhostapp.com/modificar_tarea.php";
+        final String URL = ServicioWeb.PAGINA_BASE + "modificar_tarea.php";
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
         @Override
@@ -282,9 +282,9 @@ public class FragmentModifyTask extends Fragment {
 
                 response.close();
             } catch (JSONException jsone) {
-                Log.e("--ERROR--", "Error al parsear JSON");    //  Borrar más adelante
+                Log.e("--ERROR--", "Error al parsear JSON");
             } catch (IOException ioe) {
-                Log.e("--ERROR--", "Error al realizar petición");    //  Borrar más adelante
+                Log.e("--ERROR--", "Error al realizar petición");
             }
 
             return tareaActualizada;
