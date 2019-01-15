@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -161,6 +162,12 @@ public class FragmentEditUser extends Fragment {
                 et.setError(null);
             }
         }
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(et_email.getText().toString()).matches()) {
+            et_email.setError("Formato inválido de correo electrónico");
+            camposCorrectos = false;
+        }
+
 
         et_password.setText(et_password.getText().toString().trim());
         et_confirmarPassword.setText(et_confirmarPassword.getText().toString().trim());

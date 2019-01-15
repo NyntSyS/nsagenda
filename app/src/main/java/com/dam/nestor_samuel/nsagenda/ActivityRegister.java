@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -98,6 +99,11 @@ public class ActivityRegister extends AppCompatActivity {
             else {
                 et.setError(null);
             }
+        }
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(et_email.getText().toString()).matches()) {
+            et_email.setError("Formato inválido de correo electrónico");
+            camposCorrectos = false;
         }
 
         password = et_password.getText().toString();
@@ -349,11 +355,12 @@ public class ActivityRegister extends AppCompatActivity {
             progressDialog.dismiss();
 
             if(aBoolean) {
+                usuario.setPassword(md5Password);
                 sharedPreferences.edit().putString("nombre", usuario.getNombre()).apply();
                 sharedPreferences.edit().putString("apellidos", usuario.getApellidos()).apply();
                 sharedPreferences.edit().putString("nick", usuario.getNick()).apply();
                 sharedPreferences.edit().putString("email", usuario.getEmail()).apply();
-                sharedPreferences.edit().putString("password", md5Password).apply();
+                sharedPreferences.edit().putString("password", usuario.getPassword()).apply();
 
                 Intent intent = new Intent(ActivityRegister.this, ActivityMain.class);
                 Bundle bundle = new Bundle();

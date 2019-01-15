@@ -298,7 +298,7 @@ public class FragmentShowTasks extends Fragment implements View.OnClickListener 
                             ViewGroup.LayoutParams.MATCH_PARENT,
                             ViewGroup.LayoutParams.WRAP_CONTENT
                     ));
-                    actionCardView.setTitle(tarea.getNombreTarea());
+                    actionCardView.setTitle(tarea.getNombreTarea() + " " + tarea.getFechaTarea().format(DateTimeFormatter.ofPattern("HH:mm")));
                     actionCardView.setDescription(tarea.getDescripcion());
                     actionCardView.setDividerHeight(1);
                     border.setColor(devolverColor(tarea.getColor()));

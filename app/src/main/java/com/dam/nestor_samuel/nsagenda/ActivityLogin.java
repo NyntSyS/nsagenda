@@ -184,12 +184,12 @@ public class ActivityLogin extends AppCompatActivity {
             progressDialog.dismiss();
 
             if(aBoolean) {
+                usuario.setPassword(passwordToMD5(et_password.getText().toString()));
                 sharedPreferences.edit().putString("nombre", usuario.getNombre()).apply();
                 sharedPreferences.edit().putString("apellidos", usuario.getApellidos()).apply();
                 sharedPreferences.edit().putString("nick", usuario.getNick()).apply();
                 sharedPreferences.edit().putString("email", usuario.getEmail()).apply();
-                sharedPreferences.edit().putString("password",
-                        passwordToMD5(et_password.getText().toString())).apply();
+                sharedPreferences.edit().putString("password", usuario.getPassword()).apply();
 
                 Intent intent = new Intent(ActivityLogin.this, ActivityMain.class);
                 Bundle bundle = new Bundle();

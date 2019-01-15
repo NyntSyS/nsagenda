@@ -72,7 +72,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="imagen_contacto" />
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="imageAsset" value="C:\Users\Nestor\Desktop\logo.png" />
+                                      <entry key="outputName" value="logo_aplicacion" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -82,7 +84,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputIconType" value="ACTIONBAR" />
+                            <entry key="outputIconType" value="LAUNCHER_LEGACY" />
                           </map>
                         </option>
                       </PersistentState>
