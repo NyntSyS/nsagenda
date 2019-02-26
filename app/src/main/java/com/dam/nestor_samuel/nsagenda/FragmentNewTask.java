@@ -134,6 +134,7 @@ public class FragmentNewTask extends Fragment {
         final List<String> valoresColores= Arrays.asList("", "", "", "", "", "");
         toggleSwitchColores.setEntries(valoresColores);
 
+        //  Asignar colores al Toggle Switch
         toggleSwitchColores.getButtons().get(0).setCheckedBackgroundColor(Color.WHITE);
         toggleSwitchColores.getButtons().get(0).setUncheckedBackgroundColor(Color.parseColor("#fafafa"));
         toggleSwitchColores.getButtons().get(1).setCheckedBackgroundColor(Color.parseColor("#4da6ff"));
@@ -147,6 +148,7 @@ public class FragmentNewTask extends Fragment {
         toggleSwitchColores.getButtons().get(5).setCheckedBackgroundColor(Color.parseColor("#ff5050"));
         toggleSwitchColores.getButtons().get(5).setUncheckedBackgroundColor(Color.parseColor("#ff8080"));
 
+        //  Para actualizar la vista de los colores
         toggleSwitchColores.getButtons().get(0).uncheck();
         toggleSwitchColores.getButtons().get(1).uncheck();
         toggleSwitchColores.getButtons().get(2).uncheck();
