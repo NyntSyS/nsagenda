@@ -65,6 +65,7 @@ public class ActivityAcceleroDodge extends AppCompatActivity implements SensorEv
     private Bitmap enemyBitmap;
     private SensorManager sensorManager = null;
 
+    private boolean mostrarDialogoFin;
     private boolean saliendo;
     private boolean musicaDesactivada;
     private MediaPlayer mediaPlayer;
@@ -86,6 +87,7 @@ public class ActivityAcceleroDodge extends AppCompatActivity implements SensorEv
         Bundle bundle = getIntent().getExtras();
         nick = bundle.getString("Nick");
 
+        mostrarDialogoFin = false;
         saliendo = false;
 
         database = new DatabaseAcceleroDodge(this, "Records", null, 1);
@@ -299,22 +301,41 @@ public class ActivityAcceleroDodge extends AppCompatActivity implements SensorEv
 
     @Override
     public void onBackPressed() {
-        jugando = false;
-        if(!musicaDesactivada && mediaPlayer.isPlaying()) {
-            pararMusica();
+        if(mostrarDialogoFin) {
+            finish();
         }
-        dialogoFinPartida("Partida cancelada");
+        else {
+            mostrarDialogoFin = true;
+
+
+            jugando = false;
+            if (!musicaDesactivada && mediaPlayer != null && mediaPlayer.isPlaying()) {
+                pararMusica();
+            }
+
+            if (!saliendo) {
+                dialogoFinPartida("Partida cancelada");
+            }
+        }
     }
 
     @Override
     protected void onPause() {
-        jugando = false;
-        if(!musicaDesactivada && mediaPlayer != null && mediaPlayer.isPlaying()) {
-            pararMusica();
+        if(mostrarDialogoFin) {
+            finish();
         }
+        else {
+            mostrarDialogoFin = true;
 
-        if(!saliendo) {
-            dialogoFinPartida("Partida cancelada");
+
+            jugando = false;
+            if (!musicaDesactivada && mediaPlayer != null && mediaPlayer.isPlaying()) {
+                pararMusica();
+            }
+
+            if (!saliendo) {
+                dialogoFinPartida("Partida cancelada");
+            }
         }
         super.onPause();
     }
@@ -373,11 +394,12 @@ public class ActivityAcceleroDodge extends AppCompatActivity implements SensorEv
                     if(!musicaDesactivada) {
                         soundPool.play(sonido, 1f, 1f, 0, 0, 1);
                     }
-                    //  TODO: reproducir sonido de colision
+
                     enemyBalls.remove(enemyBalls.get(i));
                     vidas--;
 
                     if(vidas <= 0) {
+                        mostrarDialogoFin = true;
                         jugando = false;
                         if(!musicaDesactivada) {
                             pararMusica();
